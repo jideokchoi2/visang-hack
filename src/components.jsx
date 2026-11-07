@@ -1,13 +1,25 @@
 // 여러 화면에서 같이 쓰는 작은 부품들
-import { BADGES, SHOP } from "./data.js";
+import { useState } from "react";
+import { BADGES, SHOP, ART } from "./data.js";
 
-// 말풍선 캐릭터 (사서, 섬 대원 등)
-export function Npc({ emoji, name, children }) {
+// 초상화: ART에 그림이 있으면 그림, 없으면 이모지
+export function Face({ emoji, art, size = 64 }) {
+  const [bad, setBad] = useState(false);
+  const src = art && ART[art];
+  return (
+    <div className="face" style={{ width: size, height: size, fontSize: size * 0.6 }}>
+      {src && !bad ? <img src={src} alt="" onError={() => setBad(true)} /> : emoji}
+    </div>
+  );
+}
+
+// 비주얼노벨식 대화창 (사서, 섬 대원 등)
+export function Npc({ emoji, art, name, color = "#fbbf24", children }) {
   return (
     <div className="npc">
-      <div className="npc-face">{emoji}</div>
-      <div className="bubble">
-        {name && <b className="npc-name">{name}</b>}
+      <Face emoji={emoji} art={art} />
+      <div className="npc-body">
+        {name && <b className="npc-name" style={{ color }}>{name}</b>}
         <div>{children}</div>
       </div>
     </div>

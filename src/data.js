@@ -130,3 +130,22 @@ export const LEAGUE = [
 ];
 
 export const OTHER_CLASS = { name: "3학년 1반", books: ["castaway", "orange"] };
+
+// ── 그림 파일 (선택) ──
+// public/art/ 폴더에 AI로 만든 그림을 넣고 경로를 적으면 이모지 대신 그림이 나온다.
+// 예: title: "./art/title.png", librarian: "./art/hesse.png"
+// 비워 두면 이모지로 표시된다.
+export const ART = {
+  title: "",
+  librarian: "",
+  guide: "",
+};
+
+// 시작 스토리 (비주얼노벨 컷신)
+export const INTRO_STORY = [
+  { who: "책벌레 고슴이", face: "🦔", art: "guide", color: "#7dd3fc", text: "어? 너 아직 집에 안 갔어? 방과 후 학교는 조금 특별하거든." },
+  { who: "책벌레 고슴이", face: "🦔", art: "guide", color: "#7dd3fc", text: "해가 지면 도서관 책들이 하나둘 깨어나. 책 속 세계로 들어갈 수 있지!" },
+  { who: "헤르만 헤세 사서", face: "🧓", art: "librarian", color: "#fbbf24", text: "반갑구나. 나는 이 도서관을 지키는 사서란다." },
+  { who: "헤르만 헤세 사서", face: "🧓", art: "librarian", color: "#fbbf24", text: "책을 골라 학급 문고에 꽂고, 책 속 모험을 끝내면 뱃지를 줄게." },
+  { who: "책벌레 고슴이", face: "🦔", art: "guide", color: "#7dd3fc", text: "뱃지는 사물함에 붙이고, 네 이야기는 학급 문집에 실려! 자, 도서관부터 가 보자!" },
+];

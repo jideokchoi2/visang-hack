@@ -15,6 +15,7 @@ export const initialState = {
   locker: { color: "#fde68a", items: [] }, // 사물함에 붙인 뱃지/스티커 id
   works: [], // 내 작품 (문집·미술실에 모임)
   reviews: 0, // 서평 수
+  mapPos: null, // 학교 지도에서 마지막으로 서 있던 자리
 };
 
 function load() {

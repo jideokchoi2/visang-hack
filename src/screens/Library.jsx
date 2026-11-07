@@ -37,7 +37,7 @@ export default function Library({ state, update, addBadge, toast }) {
   return (
     <div className="card">
       <h2>📚 도서관</h2>
-      <Npc emoji={LIBRARIAN.emoji} name={`${LIBRARIAN.name} 사서`}>
+      <Npc emoji={LIBRARIAN.emoji} art="librarian" name={`${LIBRARIAN.name} 사서`}>
         어서 와, {state.nickname}아. 오늘 기분은 어때? 너에게 맞는 책을 찾아 줄게.
         <div className="tiny">※ {LIBRARIAN.note}</div>
       </Npc>
@@ -55,7 +55,7 @@ export default function Library({ state, update, addBadge, toast }) {
       {loading && <Loading text="사서 선생님이 책장을 살펴보는 중…" />}
       {rec && (
         <div className="rec">
-          <Npc emoji={LIBRARIAN.emoji} name={`${LIBRARIAN.name} 사서`}>{rec.message}</Npc>
+          <Npc emoji={LIBRARIAN.emoji} art="librarian" name={`${LIBRARIAN.name} 사서`}>{rec.message}</Npc>
           <BookCard book={rec.book} onShelve={() => shelve(rec.book.id)} shelved={state.classBooks.includes(rec.book.id)} />
         </div>
       )}
