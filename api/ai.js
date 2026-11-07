@@ -4,6 +4,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import * as z from "zod/v4";
+import { MOCKS } from "../src/mocks.js";
 
 // 모든 AI 답변에 공통으로 붙는 말투·안전 지시문
 const TONE = `너는 초등학교 3~4학년 친구들과 이야기하는 다정한 학교 마을 캐릭터야.
@@ -34,10 +35,7 @@ const TASKS = {
 아이의 기분과 관심사를 듣고 후보 책 중 한 권을 골라 추천해.
 후보 책: ${JSON.stringify(i.books)}`,
     user: (i) => `내 기분: ${i.mood}\n내 관심사: ${i.interests.join(", ")}`,
-    mock: (i) => ({
-      bookId: i.books[0].id,
-      message: `오늘 ${i.mood} 기분이구나. 그럼 이 책이 딱이야! 친구들과 힘을 모으는 이야기거든.`,
-    }),
+    mock: MOCKS.recommend,
   },
 
   // 2) 15소년 표류기: 내 선택으로 결말 + 표지 만들기
@@ -48,16 +46,7 @@ const TASKS = {
 아이가 주인공이야. 원작의 분위기(무인도, 협동, 우정)를 지키고 희망찬 결말로 끝내.
 그 결말에 어울리는 책 표지도 디자인해 줘.`,
     user: (i) => `내 이름: ${i.nickname}\n내가 고른 선택: ${i.choices.join(" → ")}`,
-    mock: (i) => ({
-      story: `${i.nickname}, 너는 친구들과 힘을 모아 섬에서 살아남았어. 다툰 친구와도 화해했지. 마침내 멀리서 배가 보였어! 모두 함께 집으로 돌아갔어.`,
-      cover: {
-        title: `${i.nickname}의 무인도`,
-        subtitle: "함께라서 버틸 수 있었어",
-        emojis: ["🏝️", "⛵", "🤝"],
-        colorTop: "#7dd3fc",
-        colorBottom: "#fde68a",
-      },
-    }),
+    mock: MOCKS.castaway,
   },
 
   // 3) 나의 라임오렌지나무: 나만의 비밀 나무 친구에게 편지 → 나무의 답장 (임시 활동)
@@ -69,16 +58,7 @@ const TASKS = {
 아이가 힘든 이야기를 하면 믿을 수 있는 어른(선생님, 보호자)에게 말해 보라고 다정하게 권해.
 답장에 어울리는 편지 표지도 디자인해 줘.`,
     user: (i) => `${i.nickname}의 편지:\n${i.letter}`,
-    mock: (i) => ({
-      reply: `${i.nickname}야, 편지 고마워. 네 마음을 들려줘서 기뻐. 나는 언제나 여기서 네 이야기를 들을게. 내일도 놀러 와!`,
-      cover: {
-        title: "비밀 나무의 답장",
-        subtitle: `${i.nickname}에게`,
-        emojis: ["🌳", "🍊", "💌"],
-        colorTop: "#bbf7d0",
-        colorBottom: "#fed7aa",
-      },
-    }),
+    mock: MOCKS.orange,
   },
 };
 

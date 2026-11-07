@@ -26,5 +26,5 @@ const devApi = () => ({
 
 export default defineConfig(({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), "")); // .env의 ANTHROPIC_API_KEY 읽기
-  return { plugins: [react(), devApi()] };
+  return { base: "./", plugins: [react(), devApi()] }; // base: GitHub Pages 하위 주소에서도 동작
 });

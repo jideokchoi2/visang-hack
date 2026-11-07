@@ -21,7 +21,9 @@ npm run dev
 
 - **AI 키 없이도 동작**합니다. 키가 없으면 미리 준비한 예시 답변으로 돌아가요.
 - 실제 AI를 쓰려면 `.env.example`을 복사해 `.env`를 만들고 `ANTHROPIC_API_KEY`를 넣으세요. (`.env`는 git에 올라가지 않습니다)
-- 배포: Vercel에 올리면 `api/ai.js`가 서버 함수로 자동 동작합니다. 환경변수에 `ANTHROPIC_API_KEY`를 등록하세요.
+- **GitHub Pages 배포:** 저장소 Settings → Pages → Source를 **GitHub Actions**로 바꾸면 푸시할 때마다 자동으로 빌드·배포됩니다. Pages에는 서버가 없어서 AI는 예시 답변으로 동작합니다.
+- 실제 AI까지 쓰려면: `api/ai.js`를 Vercel에 따로 올리고, 빌드 환경변수 `VITE_AI_URL`에 그 주소를 넣으세요.
+- 배포(Vercel): Vercel에 올리면 `api/ai.js`가 서버 함수로 자동 동작합니다. 환경변수에 `ANTHROPIC_API_KEY`를 등록하세요.
 - 저장: 학생 데이터는 브라우저(localStorage)에 저장됩니다. 상단 ↺ 버튼으로 초기화.
 
 ## 시연 흐름 (2분)

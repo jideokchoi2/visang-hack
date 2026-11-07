@@ -1,6 +1,7 @@
 // 학생 한 명의 상태를 브라우저(localStorage)에 저장한다.
 // 해커톤 초안용: 실제 서비스에서는 이 부분을 서버 DB로 바꾸면 된다.
 import { useEffect, useState } from "react";
+import { MOCKS } from "./mocks.js";
 
 const KEY = "textip-school-v1";
 
@@ -42,12 +43,20 @@ export function useStore() {
 }
 
 // AI 서버 호출
+// - VITE_AI_URL이 있으면 그 주소(예: Vercel에 올린 api/ai)로, 없으면 같은 사이트의 /api/ai로 요청
+// - GitHub Pages처럼 서버가 없거나 실패하면 예시 답변으로 이어가서 체험이 끊기지 않게 한다
+const AI_URL = import.meta.env.VITE_AI_URL || "/api/ai";
+
 export async function askAI(task, input) {
-  const res = await fetch("/api/ai", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ task, input }),
-  });
-  if (!res.ok) throw new Error("AI 요청 실패");
-  return res.json();
+  try {
+    const res = await fetch(AI_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ task, input }),
+    });
+    if (!res.ok) throw new Error(res.status);
+    return await res.json();
+  } catch {
+    return { ...MOCKS[task](input), mock: true };
+  }
 }
